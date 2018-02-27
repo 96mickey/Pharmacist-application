@@ -1,0 +1,71 @@
+<% include ../partials/header %>
+
+<div class="ui main text container segment">
+    <div class="ui huge header">
+        New Record!
+    </div>
+    <form class="ui form" action="/records" method="POST">
+         <div class="field">
+            <label>Serial Name</label>
+            <input type="number" name="record[serialNumber]" placeholder="Serial number">
+            </div>
+        <div class="field">
+            <label>Belt Name</label>
+            <input type="text" name="record[beltnumber]" placeholder="BeltName">
+            </div>
+        <div class="field">
+            <label>Name</label>
+            <input type="text" name="record[name]" placeholder="Name" required>
+        </div>
+        <div class="field">
+            <label>Age</label>
+            <input type="number" name="record[age]" placeholder="Age" min="0" step="1" required>
+        </div>
+        <div class="field">
+            <div style="float: left; width: 50%">
+                <label>Sex</label>
+            <select id="selectgender" name="record[sex]">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            </div>
+            <div style="float:right; width: 50%">
+                <label>Designation</label>
+                <select id="selectpost" name="record[patientType]">
+                <option value="policePerson">Police </option>
+                <option value="nonPolice">Non Police</option>
+                <option value="govtOfficials">Government Servant</option>
+                </select>
+            </div>
+        </div>
+        <div class="field">
+            <label>OPD Type</label>
+            <select id="selectOPD" name="record[opdType]">
+                <option value="new">New OPD</option>
+                <option value="old">Old OPD</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Address</label>
+            <textarea name="record[address]" style="display:block" required></textarea>
+        </div>
+        <div class="field">
+            <input class="ui basic big violet button" type="submit">
+        </div>
+    </form>
+</div>
+
+
+<script>
+        $('.ui.dropdown')
+  .dropdown()
+;
+$('.ui.basic.modal')
+  .modal('attach events', '.test.button','show')
+;
+$('#toggle').click(function(){
+    $('.ui.sidebar').sidebar('toggle');
+});
+    </script>        
+    </body>
+</html>

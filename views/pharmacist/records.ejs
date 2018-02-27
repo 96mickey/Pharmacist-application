@@ -1,0 +1,229 @@
+<% include ../partials/header %>
+
+
+
+
+<div class="container main">
+    <header class="jumbotron">
+        <div class="container">
+        <h2>Welcome <%= currentUser.username %>!</h2>
+        <div class="ui grid">
+          <div class="eight wide column">
+              <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col"><strong>NEW OPD</strong></th>
+              <th scope="col">Male</th>
+              <th scope="col">Female</th>
+              <th scope="col">Male Child</th>
+              <th scope="col">Female Child</th>
+              <th scope="col">Total</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+          <th scope="row">Police</th>
+              <td><%= pmn %>
+              </td>
+              <td><%= pfn %></td>
+              <td><%= pmcn %></td>
+              <td><%= pfcn %></td>
+              <td><%= pfcn + pmcn + pfn + pmn %></td>
+            </tr>
+            <tr>
+          <th scope="row">Non Police</th>
+              <td><%= npmn %>
+              </td>
+              <td><%= npfn %></td>
+              <td ><%= npmcn %></td>
+              <td><%= npfcn %></td>
+              <td><%= npfcn + npmcn + npfn + npmn %></td>
+            </tr>
+             <tr>
+          <th scope="row">Other Govt officials</th>
+              <td ><%= mn %>
+              </td>
+              <td><%= fn %></td>
+              <td><%= mcn %></td>
+              <td><%= fcn %></td>
+              <td><%= fcn + mcn + fn + mn %></td>
+            </tr>
+            <tr>
+          <th scope="row">Total (columnwise)</th>
+              <td ><%= mn + npmn + pmn %>
+              </td>
+              <td><%= fn + npfn + pfn %></td>
+              <td><%= mcn + npmcn + pmcn %></td>
+              <td><%= fcn + npfcn + pfcn %></td>
+              <td><strong>Total </strong><%= fn + npfn + pfn + mcn + npmcn + pmcn + fcn + npfcn + pfcn + mn + npmn + pmn %></td>
+            </tr>
+          </tbody>
+           
+    </table>
+          </div>
+          <div class="eight wide column">
+              <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col"><strong>OLD OPD</strong></th>
+              <th scope="col">Male</th>
+              <th scope="col">Female</th>
+              <th scope="col">Male Child</th>
+              <th scope="col">Female Child</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+          <th scope="row">Police</th>
+              <td><%= pmo %>
+              </td>
+              <td><%= pfo %></td>
+              <td><%= pmco %></td>
+              <td><%= pfco %></td>
+              <td><%= pfco + pmco +pfo + pmo %></td>
+            </tr>
+            <tr>
+          <th scope="row">Non Police</th>
+              <td><%= npmo %>
+              </td>
+              <td><%= npfo %></td>
+              <td ><%= npmco %></td>
+              <td><%= npfco %></td>
+              <td><%= npfco + npmco +npfo + npmo %></td>
+            </tr>
+             <tr>
+          <th scope="row">Other Govt officials</th>
+              <td ><%= mo %>
+              </td>
+              <td><%= fo %></td>
+              <td><%= mco %></td>
+              <td><%= fco %></td>
+              <td><%= fco + mco +fo + mo %></td>
+            </tr>
+            <th scope="row">Total (columnwise)</th>
+              <td ><%= mo + npmo + pmo %>
+              </td>
+              <td><%= fo + npfo + pfo %></td>
+              <td><%= mco + npmco + pmco %></td>
+              <td><%= fco + npfco + pfco %></td>
+              <td><strong>Total </strong><%= fo + npfo + pfo + mco + npmco + pmco + fco + npfco + pfco + mo + npmo + pmo %></td>
+            </tr>
+          </tbody>
+           
+    </table>
+          </div>
+        </div>
+    
+
+        <p>Each pharmacist owns a different records page. So don't worry your records are safe!</p>
+         <p>
+            <a href="/records/newPatient">
+                 <button class="btn btn-primary btn-lg">
+                     Add a new Record
+                 </button>
+            </a>
+         </p>
+        
+         </div>
+    </header>
+    
+    
+    
+
+<div class="ui container main text">
+    <div class="ui header huge">
+        All Records!
+    </div>
+    <div class="ui top attached segment">
+        <div class="ui divided items">
+            <% records.forEach(function(record){ %>
+            <div class="item">
+            
+            
+                <div class="content">
+                    
+                    <div class="ui icon top left pointing dropdown button" style="float:right">
+                      <i class="wrench icon"></i>
+                      <div class="menu">
+                           
+                        <div class="item" style="padding:0; margin: 0 0">
+                            <a class="ui basic" href="/records/<%= record._id %>/edit">
+                            Edit<i class="right chevron icon"></i></a>
+                        
+                       </div> 
+                         
+                        
+                        
+                      </div>
+                    </div>
+                    
+                    <a class="header" href="/records/<%= record._id %>">
+                       <%= record.serialNumber %>
+                        </a>
+                        
+                        
+                        
+                        
+                <div class="meta">
+                    <span><%= record.created.toDateString() %></span>
+                </div>
+                <div class="description">
+                    <table >
+                        <tr >
+                            <% if(record.beltnumber){ %>
+                                <td>
+                                <p>Belt num: <%= record.beltnumber %>.</p>
+                                </td>
+                                <% } %>
+                            <td>
+                                <p>Name: <%= record.name %></p>
+                            </td>
+                            <td>
+                                <p>Age: <%= record.age %></p>
+                            </td>
+                            <td>
+                                <p>Sex: <%= record.sex %>.</p>
+                            </td>
+                            <td>
+                                <p>OPD: <%= record.opdType %>.</p>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td>
+                                <p>Patient Type: <%= record.patientType %>.</p>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    
+                    
+                    
+                </div>
+                <div class="extra">
+                    <a class="ui floated basic violet button" href="/records/<%= record._id %>">
+                        READ MORE<i class="right chevron icon"></i>
+                        </a>
+                    
+                </div>
+                
+            </div>
+        
+            </div>
+            <% });%>
+        </div>
+    </div>
+    <script>
+        $('.ui.dropdown')
+  .dropdown()
+;
+$('.ui.basic.modal')
+  .modal('attach events', '.test.button','show')
+;
+$('#toggle').click(function(){
+    $('.ui.sidebar').sidebar('toggle');
+});
+    </script>        
+    </body>
+</html>

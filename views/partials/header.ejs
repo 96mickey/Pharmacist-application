@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PharmaApp</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+        <link rel="stylesheet" href="/stylesheets/landing.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.js"></script>
+    </head>
+    <body>
+        
+        <div class="ui sidebar vertical right inverted menu">
+        <a class="item">
+            <form action="/records" method="GET" class="form-inline  ">
+             <div class="form-group">
+                 Find Records by Name:<br> <br>
+                 <input type="text" name="search" placeholder="Search by Name..." class="form-control"><br><br>
+                 <input type="submit" class="btn btn-default">
+             </div>
+         </form>
+        </a>
+        <a class="item">
+            <form action="/records" method="GET" class="form-inline">
+             <div class="form-group">
+                 Find records<br><br> From:<br>
+                 <input type="text" name="searchDate" placeholder="enter month/date/year" class="form-control"><br><br>
+                 To:<br>
+                 <input type="text" name="searchDateend" placeholder="enter month/date/year" class="form-control"><br><br>
+                 <input type="submit" class="btn btn-default">
+             </div>
+         </form>
+        </a>
+        <a class="item">*To find a single day record first enter the date(you want the records of), then enter the next date.</a>
+    </div>
+    
+        <div class="ui basic top fixed menu"  id="navmenu" >
+    
+        <div class="header item">
+            <a class="item" id="navtext" href="/">The Pharmacist's Diary</a>
+        </div>
+
+            <a href="/records" id="navtext" class="item">Records</a>
+        
+                <div class="right menu">
+                    
+                </div>
+                <% if(!currentUser){ %>
+                    <a class="item" id="navtext" href="/login">Login</a>
+                    <a class="item" id="navtext" href="/register">Sign up</a>
+                <% } else { %> 
+                    <a class="item" id="navtext">Signed in as <%= currentUser.username %></a>
+                    <a class="item" id="navtext" href="/logout">Logout</a>
+                    <a class="item" id="toggle"><i id="navtext"  class="search icon"></i></a>
+                 <% } %>   
+            </div>
+        </div>
+    
+    
+    
+</div>
+<div id="body">
+<div class="dimmed pusher">
+    <div class="container main" style="margin:3em;">
+<% if(error && error.length > 0) {%>
+<div class="flash">
+    <div class="alert alert-danger" role="alert"><%= error %></div>
+</div>
+    
+
+</div>
+<% } %>
+<% if(success && success.length > 0) {%>
+<div class="container">
+    <div class="flash">
+        <div class="alert alert-success" role="alert"><%= success %></div>
+    </div>
+    
+<% } %>
+

@@ -1,0 +1,86 @@
+<% include ../partials/header %>
+<div class="ui container main text">
+    <div class="ui header huge">
+        Record for <%= record.name %>!
+    </div>
+    <div class="ui top attached segment">
+        <div class="ui divided items">
+            <div class="item">
+                <div class="content">
+
+<div class="content">
+    
+                    
+    <% if(record.beltnumber ){ %>
+        Belt number: <%=  record.beltnumber %>
+     <% } %>
+                        
+    <div class="meta">
+         <span><%= record.created.toDateString() %></span>
+    </div>
+    <div class="description">
+        <p style="float:right">
+            <strong>Previous dates.</strong><br>
+            <% arr.forEach(function(date){ %>
+                <%= date.toDateString() %><br>
+            <% }); %>
+        </p>
+        <p>Serial number: <%= record.serialNumber %></p>
+        <p>Name: <%= record.name %></p>
+        <p>Age: <%= record.age %></p>
+        <p>Sex: <%= record.sex %></p>
+        <p>OPD: <%= record.opdType %></p>
+        <p>Designation: <%= record.patientType %></p>
+        <p>Address: <%= record.address %>.</p>
+        
+    </div>
+    <a class="ui button green ok inverted" href="/records/<%= record._id %>/edit">
+                            Edit<i class="right chevron icon"></i></a>
+    <a class="ui button red  inverted test">
+                            Delete<i class="right chevron icon"></i></a>
+    </div>
+    
+    
+                   <div class="ui basic modal">
+                      <div class="ui icon header">
+                        <i class="archive icon"></i>
+                        Delete this Record!
+                      </div>
+                      <div class="content">
+                        <p>Once you delete a record, There is no measure to retrieve it back! You can create this again but it will never be the same.</p>
+                      </div>
+                      <div class="actions">
+                          
+                        <div class="ui red basic cancel inverted button">
+                          <i class="remove icon"></i>
+                          No
+                        </div>
+                        
+                            
+                                
+                                    <form action="/records/<%= record._id %>?_method=DELETE" method="POST" style="float:right">
+                                    <button  class="ui green basic ok inverted button" >
+                                        <i class="checkmark icon"></i>
+                                        Yes    
+                                    </button>
+                                   </form>
+                                
+                            
+                          
+                        
+                      </div>
+                    </div>
+                    
+<script>
+        $('.ui.dropdown')
+  .dropdown()
+;
+$('.ui.basic.modal')
+  .modal('attach events', '.test.button','show')
+;
+$('#toggle').click(function(){
+    $('.ui.sidebar').sidebar('toggle');
+});
+    </script>        
+    </body>
+</html>
